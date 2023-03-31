@@ -2,11 +2,28 @@
 #include <string>
 using namespace std;
 
+
 int main()
 {
-	
+	double socialmaxtax = 160200;
+	double bracketper10 = 10275;
+	double bracketper12 = 41775;
+	double bracketper22 = 89075;
+	double bracketper24 = 170050;
+	double bracketper32 = 215950;
+	double bracketper35 = 539900;
+	double bracketper37 = bracketper35 + 1;
+	double step12per = bracketper10 * .1;
+	double step22per = (bracketper12 - bracketper10) * .12 + step12per;
+	double step24per = (bracketper22 - bracketper12) * .22 + step22per;
+	double step32per = (bracketper24 - bracketper22) * .24 + step24per;
+	double step35per = (bracketper32 - bracketper24) * .32 + step32per;
+	double step37per = (bracketper35 - bracketper32) * .35 + step35per;
 
-	double b;
+
+
+
+	double b = 0; //Intialize for salary 
 	int loop = 1;
 	double incomewith;
 	int a = 1;
@@ -20,50 +37,49 @@ int main()
 
 			cout << "Make some money you lazy bum :)";
 		}
-		else if (b <= 9875)
+		else if (b <= bracketper10)
 		{
 			incomewith = b * .10;
 
 		}
-		else if (b <= 40125)
+		else if (b <= bracketper12)
 		{
 
-			incomewith = (b - 9875) * .12 + 987.5;
+			incomewith = (b - bracketper10) * .12 + step12per;
 
 		}
-		else if (b <= 85525)
+		else if (b <= bracketper22)
 		{
-			incomewith = (b - 40125) * .22 + 4617.50;
-
-
-
-		}
-		else if (b <= 163300)
-		{
-			incomewith = (b - 85525) * .24 + 14605.50;
-
+			incomewith = (b - bracketper12) * .22 + step22per ;
 
 
 
 		}
-		else if (b <= 207350)
+		else if (b <= bracketper24)
 		{
-			incomewith = (b - 163300) * .32 + 33271.5;
+			incomewith = (b - bracketper22) * .24 + step24per;
+
+
 
 
 		}
-		else if (b <= 518400)
+		else if (b <= bracketper32)
 		{
+			incomewith = (b - bracketper24) * .32 + step32per;
 
-			incomewith = (b - 207350) * .35 + 47367.50;
 
 		}
-		else if (b >= 518401)
+		else if (b <= bracketper35)
 		{
-			incomewith = (b - 518400) * .37 + 156235;
+
+			incomewith = (b - bracketper32) * .35 + step35per;
 
 		}
+		else if (b >= bracketper37)
+		{
+			incomewith = (b - bracketper35) * .37 + step37per;
 
+		}
 		else
 		{
 
@@ -72,14 +88,14 @@ int main()
 		}
 
 		double socialtax;
-		if (b <= 142800) 
+		if (b <= socialmaxtax)
 		{
 			socialtax = b * .062;
 
 		}
-		else if ( b > 142800)
+		else if (b > socialmaxtax)
 		{
-			socialtax = 142800*.062; 
+			socialtax = socialmaxtax * .062;
 
 		}
 
@@ -88,13 +104,12 @@ int main()
 
 
 		cout << " " << b << " your total salary " << endl;
-		cout << " income withheld is " << incomewith << endl;
+		cout << " Federal income withheld is " << incomewith << endl;
 		cout << " social security withheld is " << socialtax << endl;
-		cout << " medicaid withheld " << medicadetax << endl<< " ------------------------------" << endl;
+		cout << " medicaid withheld " << medicadetax << endl << " ------------------------------" << endl;
 		cout << " how much withheld total " << incomewith + socialtax + medicadetax << endl;
 		cout << " your total payout average per week after taxes " << (b - incomewith - socialtax - medicadetax) / 52 << endl;
 		cout << " do you wish to start again 1 for yes , 0 for no " << endl;
-		cin >> a; 
+		cin >> a;
 	}
 }
- 
